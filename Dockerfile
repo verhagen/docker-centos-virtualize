@@ -25,6 +25,9 @@ RUN mkdir -p /opt/parasoft/virtualize/9.8
 RUN cd /opt && echo -e '1\n\n\n' | /opt/parasoft_virtualize_9.8_linux_x86_64_20141024.sh
 RUN rm /opt/parasoft_virtualize*
 
+# Create Virtualize data directory
+RUN mkdir -p /var/opt/virtualize
+
 # Configure Supervisor it to run Virtualize
 ADD virtualize.conf /etc/supervisor/conf.d/
 
