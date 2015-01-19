@@ -1,1 +1,1 @@
-docker build -t parasoft/lubuntu-centos-virtualize:latest .
+docker build -t parasoft/centos-virtualize-server:latest .
