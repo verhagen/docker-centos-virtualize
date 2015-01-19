@@ -15,12 +15,21 @@ RUN yum install -y bash-completion \
 
 #  supervisor \
 
+# Parasoft Virtualize 
+# Copy the *.tar.gz; unpack the file; run the *.sh installer
 RUN mkdir -p /opt
-COPY parasoft_virtualize_9.7_linux_x86_64.tar.gz /opt/parasoft_virtualize_9.7_linux_x86_64.tar.gz
-RUN cd /opt && tar -xzfv parasoft_virtualize_9.7_linux_x86_64.tar.gz
-RUN chmod +x /opt/virtualize*
+COPY parasoft_virtualize_9.8_linux_x86_64.tar.gz /opt/parasoft_virtualize_9.8_linux_x86_64.tar.gz
+RUN cd /opt && tar -xzvf parasoft_virtualize_9.8_linux_x86_64.tar.gz
+RUN chmod +x /opt/parasoft_virtualize_9.8_linux_x86_64_20141024.sh
+RUN mkdir -p /opt/parasoft/virtualize/9.8
+RUN cd /opt && echo -e '1\n\n' | /opt/parasoft_virtualize_9.8_linux_x86_64_20141024.sh
+RUN rm /opt/parasoft_virtualize*
+
+# Configure Supervisor it to run Virtualize
+ADD virtualize.conf /etc/supervisor/conf.d/
 
 # Make sure SSH and RDP are exposed to the outside world
 EXPOSE 22
 
 #CMD ["supervisord", "-n"]
+	
